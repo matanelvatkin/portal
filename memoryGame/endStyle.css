@@ -1,0 +1,17 @@
+body{
+    background-image: url("./card/backgroundStrat.jpg");
+    padding-left: 40%;
+    padding-top: 20%;
+}
+
+#pEnd{
+    font-size: 24px;
+}
+
+#bEnd{
+    background-image: url("./card/backgroundStrat.jpg");
+}
+
+#bend:hover{
+    border: 0.5px solid rgba(255, 255, 255, 0.2);
+}

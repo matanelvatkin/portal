@@ -1,0 +1,140 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    
+    background: rgb(28, 90, 45);
+    width: 100%;
+    height: 100%;
+}
+.popup{
+    background-color: aliceblue;
+    position: absolute;
+    width:40vw;
+    height: 30vw;
+    transform:translate(-50% -50%);
+    top: 0;
+    left: 32%;
+    text-align: center;
+    visibility: hidden;
+    transition: transfrom 1s,top 1s ; 
+}
+.open_popup{
+    top: 30%;
+    transform:translate(-50% -50%);
+    visibility: visible;
+}
+#openerPopUp{
+    margin: 15%;
+}
+#wellcame{
+    font-size: 24px;
+}
+.signIn{
+    background-color: aliceblue;
+    position: absolute;
+    width:40vw;
+    height: 30vw;
+    transform:translate(-50% -50%);
+    top: 30%;
+    left: 32%;
+    text-align: center;
+    transition: transfrom 1s,top 1s ;
+    display: flex;
+    visibility: hidden;
+    flex-direction: column;
+    padding: 10% 10% 10% 10%;
+}
+#removing{
+    background-color: aliceblue;
+    position: absolute;
+    width:40vw;
+    height: 30vw;
+    transform:translate(-50% -50%);
+    top: 30%;
+    left: 32%;
+    text-align: center;
+    transition: transfrom 1s,top 1s ;
+    display: flex;
+    visibility: hidden;
+    flex-direction: column;
+    padding: 10% 10% 10% 10%;
+}
+#choseAvatr{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+    margin-left: 20%;
+}
+#playrB{
+    border-radius: 50px;
+    bottom: 0;
+}
+.bot img, .avatrImg{
+    width: 40px;
+    height: 40px;
+}
+#avatr{
+    width: 80px;
+    height: 80px;
+}
+#submit{
+    display: block;
+    margin: auto;
+    margin-top: 10%;
+    border-radius: 5%;
+}
+#mainDiv{
+    width: 50%;
+    display: grid;
+    grid-template-columns: repeat(3,10rem);
+    grid-template-rows: repeat(2,10rem);
+    margin: 20% 0% 0 28%;
+}
+
+#bA_R{
+    padding-left: 18%;
+    padding-top: 10%;
+    display: flex;
+    flex-direction: column;  
+    position: absolute;
+}
+.less_add{
+    width: 60px;
+    border-radius: 60px;
+}
+
+
+
+.borderImg{
+    margin: 8%;
+    position: relative;
+}
+
+.game,.mainGames{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.mainGames{ 
+    transition: all 0.3s ease-in;
+}
+
+.mainGames:hover{
+    transform: scale(1.2); 
+}
+
+.opasity{
+    opacity: 0.1;
+}
+#user{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+}
+

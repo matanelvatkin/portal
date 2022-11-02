@@ -1,0 +1,25 @@
+body{
+    background-image: url("./card/backgroundStrat.jpg");
+    padding: 0;
+    margin: 0;
+    padding-top: 20%;
+    
+}
+h2{
+    text-align: center;
+}
+
+#start{
+    display: grid;
+    grid-template-columns:repeat(2, 10rem);
+    grid-template-rows:repeat(2, 5rem);
+    grid-gap: 2rem;
+    justify-content:center;
+}
+
+.button{
+    background-image: url("./card/backgroundStrat.jpg");
+}
+.button:hover{
+    border: 0.5px solid rgba(255, 255, 255, 0.2);
+}
