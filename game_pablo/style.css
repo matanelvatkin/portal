@@ -1,0 +1,59 @@
+#gameInfo {
+    display: flex;
+    justify-content: center; 
+}
+
+#gameInfo p {
+    font-size: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    margin-right: 10px;
+    padding: 10px 20px;
+}
+
+#board {
+    margin: auto;
+    margin-top: 25px;
+    border-radius: 5px;
+    background-color: #17BEBB;
+    display: flex;
+    justify-content: center;
+    width: 500px;
+    flex-wrap: wrap;
+}
+
+.hidden {
+    text-indent:-5000px;
+}
+
+.cardBox {
+    border-radius: 5px;
+    background-color: #EE6055;
+    height: 100px;
+    width: 100px;
+    margin: 10px; 
+    text-align: center;
+}
+
+.sameCard {
+    background-color: pink;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
+.cardBox p {
+    margin-top: 25px;
+    font-size: 35px;
+}
+
+
+
