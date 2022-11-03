@@ -1,5 +1,14 @@
+// letters to be used in the cards
 const cards = ["a", "a", "a", "a", "b", "b", "b", "b", "c", "c", "c", "c"];
+// the score a player got by playing the game, taken from the portal's local storage 
+let gameScore = Number(localStorage.getItem("gameNumber"));
+let addScore = gameScore;
+// alert(`current game score is ${gameScore}`);
 
+// an element that adds the score to the board
+let scoreHtml = document.querySelector(".footer h2");
+
+// shuffle the letters in the array for the board
 function shuffleCards(arr) {
   for (i in arr) {
     randomInx = Math.floor(Math.random() * arr.length);
@@ -12,21 +21,11 @@ function shuffleCards(arr) {
 console.log(cards); //check
 console.log(shuffleCards(cards)); //check
 
-
-
-// const divElement = document.getElementById("d");
-//       divElement.innerText = "hello from js";
-
-// const newElement = document.createElement("p");
-// newElement.innerText = "this is p from js";
-// newElement.id = "moshe";
-
-// divElement.appendChild(newElement);
-
 let firstCard = null,
     secondCard = null,
     count = 0;
 
+// if the the two chosen cards are don't match, they become hidden 
 function resetCards(){
   firstCard.classList.add("hidden");
   secondCard.classList.add("hidden");
@@ -35,6 +34,7 @@ function resetCards(){
   count = 0;
 }
 
+// what should happen when one or two cards are clicked 
 function cardClicked(e){
   let clicked = null;
   if(e.target.matches('p')){
@@ -59,6 +59,9 @@ function cardClicked(e){
         firstCard = null;
         secondCard = null;
         count = 0;
+        gameScore += Number(10);
+        scoreHtml.innerText = `Game Score: ${gameScore}`;
+
       }
       else {
         setTimeout(resetCards, 1000);
@@ -66,27 +69,15 @@ function cardClicked(e){
     }
 
   }
-  // else {
-  //   if(firstCard.id != e.target.id){
-  //     secondCard = e.target;
-  //     secondCard.classList.remove("hidden");
-
-  //     if(firstCard == secondCard){
-  //       console.log("they are equal");
-        
-  //    }
-     
-  //    else{
-  //     firstCard.classList.add("hidden");
-  //     secondCard.classList.add("hidden");
-  //     firstCard = null; 
-  //     secondCard = null;
-  //   }
-
-  //   }
-  // }
 }
 
+function portalClick(){
+  addScore += gameScore;
+  localStorage.setItem("gameNumber",addScore)
+  window.location.href = "\\mainIndex.html";
+}
+
+// add the letters to the cards on the board
 function createCard(crd, idx) {
     const board = document.querySelector("#board");
     const cardDiv = document.createElement("div");
@@ -102,6 +93,7 @@ function createCard(crd, idx) {
     // new div with card class
 }
 
+// start the game from scratch
 function resetGame(cards){
   const cardStyles = Array.from(document.querySelector("#board").children);
   for(i in cardStyles){
@@ -109,22 +101,12 @@ function resetGame(cards){
         cardStyles[i].classList.add("hidden");
         cardStyles[i].classList.remove("sameCard");
       }
-      // console.log(cardStyles[i]);
     }
-  // const cardStyles = document.querySelector("#board").children;
-  // for(i in cards){
-  //   if(!(cardStyles[i].contains("hidden")) && cardStyles[i].contains("sameCard")){
-  //     cardStyles[i].classList.add("hidden");
-  //     cardStyles[i].classList.remove("sameCard");
-  //   }
-  //   else if(!(cardStyles[i].contains("hidden"))){
-  //     cardStyles[i].classList.add("hidden");
-  //   }
-  // }
-  // return true;
+    gameScore = Number(0);
+    scoreHtml.innerText = `Game Score: ${gameScore}`;
 }
 
-
+// initialize the board 
 function init(){
     const buttonPush = document.querySelector("button");
     console.log(buttonPush);
