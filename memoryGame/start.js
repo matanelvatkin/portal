@@ -2,19 +2,18 @@ const button1 = document.getElementById("button1");
 const button2 = document.getElementById("button2");
 const button3 = document.getElementById("button3");
 const button4 = document.getElementById("button4");
-let user = localStorage.getItem("users");//to names
+const users = []
+let user = JSON.parse(localStorage.getItem("users"));//to names
 const names = document.getElementById("name");//to names
-let gameNumber = localStorage.getItem("gameNumber")?localStorage.getItem("gameNumber"):0 //to names
+let gameNumber = localStorage.getItem("gameNumber")!=undefined?localStorage.getItem("gameNumber"):0 //to names
 const setName = ()=> {
-    names.innerText = user[gameNumber].nickName+ " ";
+    names.innerText = user[Number(gameNumber)].nickName;
 }
 const getUsers = ()=>{
-    user=JSON.parse(user);
-    if(user.length==1){
-        user=JSON.parse(user[0]);
-    }
-    else{
-        user = user.map(v=>JSON.parse(v))
+    if(gameNumber==0){
+        user.forEach((v,i)=>{
+            user[i] = (JSON.parse(v));
+        })
     }
 }
 button1.addEventListener("click",()=>{

@@ -100,6 +100,7 @@ removePop.addEventListener("click",()=>{
     }
     else{
         localStorage.removeItem("users");
+        openPopUp.classList.add("open_popup");
     }
     document.getElementById("removing").style.visibility = "hidden";
 });
@@ -203,7 +204,7 @@ rightArrow.addEventListener("click",()=>{
 });
 
 
-if(localStorage.getItem("users") == undefined){
+if(localStorage.getItem("users") == undefined|| localStorage.getItem("users") == "[]"){
     setTimeout(()=>openPopUp.classList.add("open_popup"),1000);
 }
 else{

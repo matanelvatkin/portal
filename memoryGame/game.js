@@ -31,19 +31,29 @@ const Allcards = [{src:'card\\boston.svg', class:"boston",},{src:'card\\boston.s
 let cards=[];
 const board=document.getElementById("board");
 const eTime = document.getElementById("time");
+const record = document.getElementById("record");
+const users =[];
+const gameNumber = localStorage.getItem("gameNumber");
+let extract = JSON.parse(localStorage.getItem("users"))
+const getUsers = ()=>{
+    if(gameNumber==0){
+        extract.forEach((v)=>{
+            users.push(JSON.parse(v))
+            console.log(users);
+        
+        }); 
+    }
+    else{
+        extract.forEach((v)=>{
+            users.push(v);
+            console.log(users);
+        
+        }); 
+    }
+}
+
 
 let firstCard = null,timer,victory=0 ,scores = 0,clicker = 0 ,addScore = 1;
-const records={"r1":{"score":0,"name":"empty","numOfCard":0},
-"r2":{"score":0,"name":"empty","numOfCard":0},
-"r3":{"score":0,"name":"empty","numOfCard":0},
-"r4":{"score":0,"name":"empty","numOfCard":0},
-"r5":{"score":0,"name":"empty","numOfCard":0}};
-
-const printerRecord = {"R1":{"s":document.getElementById("score1"),"cn":document.getElementById("cardNumber1"),"n":document.getElementById("name1")},
-"R2":{"s":document.getElementById("score2"),"cn":document.getElementById("cardNumber2"),"n":document.getElementById("name2")},
-"R3":{"s":document.getElementById("score3"),"cn":document.getElementById("cardNumber3"),"n":document.getElementById("name3")},
-"R4":{"s":document.getElementById("score4"),"cn":document.getElementById("cardNumber4"),"n":document.getElementById("name4")},
-"R5":{"s":document.getElementById("score5"),"cn":document.getElementById("cardNumber5"),"n":document.getElementById("name5")},}
 
 function shaffle(){
     let max = cards.length;
@@ -161,6 +171,7 @@ function printer(str){
     
 }
 
+
 function getNumCards(){
     const numOfCards = localStorage.getItem("numOfCards");
     if(numOfCards==20){
@@ -199,153 +210,42 @@ function getNumCards(){
         eTime.innerText = "02:00";
     }
 }
-
 function addRcorde(){
-    if((localStorage.getItem("s1") < scores) || ((localStorage.getItem("s1") == scores) && (localStorage.getItem("cn1") < cards.length)) ){
-        localStorage.setItem("s5",localStorage.getItem("s4"))
-        localStorage.setItem("s4",localStorage.getItem("s3"))
-        localStorage.setItem("s3",localStorage.getItem("s2"))
-        localStorage.setItem("s2",localStorage.getItem("s1"))
-        
-        localStorage.setItem("n5",localStorage.getItem("n4"))
-        localStorage.setItem("n4",localStorage.getItem("n3"))
-        localStorage.setItem("n3",localStorage.getItem("n2"))
-        localStorage.setItem("n2",localStorage.getItem("n1"))
-        
-        localStorage.setItem("cn5",localStorage.getItem("cn4"))
-        localStorage.setItem("cn4",localStorage.getItem("cn3"))
-        localStorage.setItem("cn3",localStorage.getItem("cn2"))
-        localStorage.setItem("cn2",localStorage.getItem("cn1"))
-        
-        localStorage.setItem("s1",scores)
-        localStorage.setItem("n1",localStorage.getItem("name"))
-        localStorage.setItem("cn1",localStorage.getItem("numOfCards"))
-    }
-    else if((localStorage.getItem("s2") < scores)|| ((localStorage.getItem("s2") == scores) && (localStorage.getItem("cn2") < cards.length))){
-        localStorage.setItem("s5",localStorage.getItem("s4"))
-        localStorage.setItem("s4",localStorage.getItem("s3"))
-        localStorage.setItem("s3",localStorage.getItem("s2"))
-        
-        localStorage.setItem("n5",localStorage.getItem("n4"))
-        localStorage.setItem("n4",localStorage.getItem("n3"))
-        localStorage.setItem("n3",localStorage.getItem("n2"))
-
-        localStorage.setItem("cn5",localStorage.getItem("cn4"))
-        localStorage.setItem("cn4",localStorage.getItem("cn3"))
-        localStorage.setItem("cn3",localStorage.getItem("cn2"))
-        
-        localStorage.setItem("s2",scores)
-        localStorage.setItem("n2",localStorage.getItem("name"))
-        localStorage.setItem("cn2",localStorage.getItem("numOfCards"))
-    }
-    else if((localStorage.getItem("s3") < scores)|| ((localStorage.getItem("s3") == scores) && (localStorage.getItem("cn3") < cards.length))){
-        localStorage.setItem("s5",localStorage.getItem("s4"))
-        localStorage.setItem("s4",localStorage.getItem("s3"))
-        
-        localStorage.setItem("n5",localStorage.getItem("n4"))
-        localStorage.setItem("n4",localStorage.getItem("n3"))
-        
-        localStorage.setItem("cn5",localStorage.getItem("cn4"))
-        localStorage.setItem("cn4",localStorage.getItem("cn3"))
-        
-        localStorage.setItem("s3",scores)
-        localStorage.setItem("n3",localStorage.getItem("name"))
-        localStorage.setItem("cn3",localStorage.getItem("numOfCards"))
-    }
-    else if((localStorage.getItem("s4") < scores)|| ((localStorage.getItem("s4") == scores) && (localStorage.getItem("cn4") < cards.length))){
-        localStorage.setItem("s5",localStorage.getItem("s4"))
-        
-        localStorage.setItem("n5",localStorage.getItem("n4"))
-        
-        localStorage.setItem("cn5",localStorage.getItem("cn4"))
-        
-        localStorage.setItem("s4",scores)
-        localStorage.setItem("n4",localStorage.getItem("name"))
-        localStorage.setItem("cn4",localStorage.getItem("numOfCards"))
-    }
-    else if((localStorage.getItem("5") < scores)|| ((localStorage.getItem("s5") == scores) && (localStorage.getItem("cn5") < cards.length))){
-        localStorage.setItem("s5",scores)
-        localStorage.setItem("n5",localStorage.getItem("name"))
-        localStorage.setItem("cn5",localStorage.getItem("numOfCards"))
-    }
-    
+    users[gameNumber].score+=scores;
+    localStorage.setItem("users",JSON.stringify(users))
 }
-function checkingRcords(){
-    const ob ={"s":"0","n":"empty","cardsNumber":"0"}
-    if(localStorage.getItem("s1") == undefined){
-        localStorage.setItem("s1",ob.s);
-        localStorage.setItem("n1",ob.n);
-        localStorage.setItem("cn1",ob.cardsNumber);
-        
-    }
-    const rc1 ={"n":localStorage.getItem("n1"),"s":localStorage.getItem("s1"),"cardsNumber":localStorage.getItem("cn1")};
-    records.r1.name=rc1.n;
-    records.r1.score=rc1.s;
-    records.r1.numOfCard=rc1.cardsNumber;
-    
-    if(localStorage.getItem("s2") == undefined){
-        localStorage.setItem("s2",ob.s);
-        localStorage.setItem("n2",ob.n);
-        localStorage.setItem("cn2",ob.cardsNumber);
-        
-    }
-    const rc2 ={"n":localStorage.getItem("n2"),"s":localStorage.getItem("s2"),"cardsNumber":localStorage.getItem("cn2")};
-    records.r2.name=rc2.n;
-    records.r2.score=rc2.s;
-    records.r2.numOfCard=rc2.cardsNumber;
-    
-    if(localStorage.getItem("s3") == undefined){
-        localStorage.setItem("s3",ob.s);
-        localStorage.setItem("n3",ob.n);
-        localStorage.setItem("cn3",ob.cardsNumber);
-        
-    }
-    const rc3 ={"n":localStorage.getItem("n3"),"s":localStorage.getItem("s3"),"cardsNumber":localStorage.getItem("cn3")};
-    records.r3.name=rc3.n;
-    records.r3.score=rc3.s;
-    records.r3.numOfCard=rc3.cardsNumber;
-    
-    if(localStorage.getItem("s4") == undefined){
-        localStorage.setItem("s4",ob.s);
-        localStorage.setItem("n4",ob.n);
-        localStorage.setItem("cn4",ob.cardsNumber);
 
-    }
-    const rc4 ={"n":localStorage.getItem("n4"),"s":localStorage.getItem("s4"),"cardsNumber":localStorage.getItem("cn4")};
-    records.r4.name=rc4.n;
-    records.r4.score=rc4.s;
-    records.r4.numOfCard=rc4.cardsNumber;
-    
-    if(localStorage.getItem("s5") == undefined){
-        localStorage.setItem("s5",ob.s);
-        localStorage.setItem("n5",ob.n);
-        localStorage.setItem("cn5",ob.cardsNumber);
-        
-    }
-    const rc5 ={"n":localStorage.getItem("n5"),"s":localStorage.getItem("s5"),"cardsNumber":localStorage.getItem("cn5")};
-    records.r5.name=rc5.n;
-    records.r5.score=rc5.s;
-    records.r5.numOfCard=rc5.cardsNumber;
+function checkRecord(){
+    // let temp = [];
+    // let smeller = 0;
+    // for (i of users){
+    //     for(j of users){
+    //         if(i.score <j.score){
+    //             smeller++;
+    //         }
+    //     }
+    //     temp[smeller] = i;
+    //     smeller = 0;
+    // }
+    // temp.forEach((v,i)=>{
+    //     users[i] = v;
+    // });
 }
 function showRecord(){
-    checkingRcords();
-    printerRecord.R1.s.innerText = records.r1.score;
-    printerRecord.R1.n.innerText=records.r1.name;
-    printerRecord.R1.cn.innerText= records.r1.numOfCard;
-    printerRecord.R2.s.innerText = records.r2.score;
-    printerRecord.R2.n.innerText=records.r2.name;
-    printerRecord.R2.cn.innerText= records.r2.numOfCard;
-    printerRecord.R3.s.innerText = records.r3.score;
-    printerRecord.R3.n.innerText=records.r3.name;
-    printerRecord.R3.cn.innerText= records.r3.numOfCard;
-    printerRecord.R4.s.innerText = records.r4.score;
-    printerRecord.R4.n.innerText=records.r4.name;
-    printerRecord.R4.cn.innerText= records.r4.numOfCard;
-    printerRecord.R5.s.innerText = records.r5.score;
-    printerRecord.R5.n.innerText=records.r5.name;
-    printerRecord.R5.cn.innerText= records.r5.numOfCard;
-    
+    getUsers();
+    checkRecord();
+    record.innerHTML =""
+    users.map((v)=>{
+        record.innerHTML +=  `
+        <ul style = "display: block;">
+        <il><img src="${v.avtar}" alt="${v.nickName}" class = "avatrImg"></il>
+        <il>${v.user}</il>
+        <il>${v.nickName}</il>
+        <il>${v.score}</il>
+        </ul>`
+    });
 }
+
 function init(){    
     getNumCards();
     showRecord();
