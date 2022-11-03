@@ -1,11 +1,5 @@
 const text = document.querySelectorAll(".game");
 const imgs = document.querySelectorAll(".mainGames");
-const imgLink = {ft:{src:null,admin:"moshe",name:"fortnite"}
-, gow:{src:null,admin:"dfasc",name:"game of wor"} 
-, giba :{src:null,admin:"mob vd",name:"giga bash"}
-, mario:{src:null,admin:"asdf",name:"mario"},
-nba:{src:".\\memoryGame\\startIndex.html",admin:"matanel",name:"nba"},
-rr:{src:null,admin:"bfasdfcx",name:"rosh royal"}};
 const next = document.getElementById("submit");
 const openPopUp = document.getElementById("popUp");
 const nextButton = document.getElementById("playrB");
@@ -15,9 +9,19 @@ const leftArrow = document.getElementById("leftB");
 const rightArrow = document.getElementById("rightB");
 const avatarImg =document.getElementById("avatr");
 const inputUsers = document.getElementById("numPlayrs");
-const avatars = ["./gamesPictures/avatar1.jpg","./gamesPictures/avatar2.jpg","./gamesPictures/avatar3.jpg","./gamesPictures/avatar4.jpg"];
 const removePop = document.getElementById("remove_player");
 const showUsers = document.getElementById("user");
+
+//to-do: add on one object your details
+const imgLink = {pablo:{src:".\\game_pablo\\index.html",admin:"pablo",name:"pablo memory game"}
+, anat:{src:".\\game_anat\\index.html",admin:"anat",name:"anat memory game"} 
+, libi :{src:null,admin:"mob vd",name:"giga bash"}
+, itamar:{src:".\\game_itamar\\project_1.html",admin:"itamar",name:"itamar memory game"},
+vatkin:{src:".\\memoryGame\\startIndex.html",admin:"matanel",name:"nba"},
+moran:{src:null,admin:"bfasdfcx",name:"rosh royal"}};
+
+//avatar IMG
+const avatars = ["./gamesPictures/avatar1.jpg","./gamesPictures/avatar2.jpg","./gamesPictures/avatar3.jpg","./gamesPictures/avatar4.jpg"];
 let numPlayers, numPopUps = 1, avatarCounter = 0,nicki = 0;
 const users =[];
 
@@ -42,6 +46,7 @@ const checkUsers = ()=>{
     return 0;
 }
 const showingUsers = ()=>{
+    showUsers.innerHTML =""
     users.map((v)=>{
         showUsers.innerHTML +=  `
         <ul">
@@ -67,7 +72,6 @@ const addFunctions= ()=>{
 const removeFunctoins = ()=>{
     removeButton.addEventListener("click",()=>{
         document.getElementById("removing").style.visibility = "visible";
-        numPlayers--    
     });
     removeButton.addEventListener("mouseover",()=>{
         removeButton.style.background = "rgb(20 85 170)"
@@ -78,18 +82,27 @@ const removeFunctoins = ()=>{
     
 }
 removePop.addEventListener("click",()=>{
-    users.splice(users.findIndex((v)=>{
+    let removePlayer = users.findIndex((v)=>{
         if(v.nickName == document.getElementById("RnickName").value){
             return true
         }
         return false
-    }) -1);
+    });
+    console.log(removePlayer);
+    if(removePlayer != -1){
+        users.splice(removePlayer,1);
+        numPlayers--    
+    }
     document.getElementById("RnickName").value = "";
-    localStorage.setItem("users",JSON.stringify(users));
-    document.getElementById("removing").style.visibility = "hidden";
     showingUsers();
-})
-
+    if(users.length > 0){
+        localStorage.setItem("users",JSON.stringify(users));
+    }
+    else{
+        localStorage.removeItem("users");
+    }
+    document.getElementById("removing").style.visibility = "hidden";
+});
 
 nextButton.addEventListener("click",()=>{
     
@@ -110,19 +123,21 @@ nextButton.addEventListener("click",()=>{
             document.getElementById("nickName").value = "";
             document.getElementById("fullName").value = "";
             document.getElementById("signin").style.visibility = "hidden";
+            addFunctions();
             if(users.length == numPlayers-1){
                 nextButton.innerText="end";
-                addFunctions();
             }
         }
     }
     if(users.length<numPlayers){
         setTimeout(()=>{document.getElementById("signin").style.visibility = "visible";},100)
+        showingUsers();
     }
     else{
         console.log(users);
         localStorage.setItem("users",JSON.stringify(users));
     }
+    showingUsers();
 });
 
 inputUsers.addEventListener("change",()=>{
@@ -152,7 +167,7 @@ imgs.forEach((v)=>{
       text.forEach((tx)=>{
             
             setTimeout(()=>tx.innerText = `game name: ${imgLink[v.id].name}\n admin code: ${imgLink[v.id].admin}`,300)
-            tx.style.fontSize = "24px"
+            tx.style.fontSize = "20px"
       })
     });
     v.addEventListener("mouseout",()=>{
@@ -188,18 +203,18 @@ rightArrow.addEventListener("click",()=>{
 });
 
 
-if(localStorage.getItem("users") == null){
+if(localStorage.getItem("users") == undefined){
     setTimeout(()=>openPopUp.classList.add("open_popup"),1000);
 }
 else{
     addFunctions();
     removeFunctoins();
+    //extract JSON
     let temp = JSON.parse(localStorage.getItem("users"))
     temp.forEach((v)=>{
-        users.push(JSON.parse(v))
+        users.push(v)
     })
     showingUsers();
-    console.log(users);
 }
 
 
