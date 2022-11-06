@@ -12,7 +12,7 @@ const setName = ()=> {
 const getUsers = ()=>{
     if(gameNumber==0){
         user.forEach((v,i)=>{
-            user[i] = (JSON.parse(v));
+            user[i]=(JSON.parse(v));
         })
     }
 }
