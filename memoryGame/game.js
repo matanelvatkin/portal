@@ -35,6 +35,7 @@ const record = document.getElementById("record");
 const users =[];
 const gameNumber = localStorage.getItem("gameNumber");
 let extract = JSON.parse(localStorage.getItem("users"))
+
 const getUsers = ()=>{
     if(gameNumber==0){
         extract.forEach((v)=>{
@@ -51,7 +52,6 @@ const getUsers = ()=>{
         }); 
     }
 }
-
 
 let firstCard = null,timer,victory=0 ,scores = 0,clicker = 0 ,addScore = 1;
 
