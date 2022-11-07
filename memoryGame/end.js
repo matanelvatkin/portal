@@ -12,7 +12,7 @@ const getUsers = ()=>{ //extract JSON
 }
 const main= ()=>{ //check if is the last player
     getUsers();
-    if(gameNumber < user.length){
+    if(gameNumber < user.length&&user.length > 1){
         restart.innerText = "next player: " +user[++gameNumber].nickName; 
         localStorage.setItem("gameNumber",gameNumber);
     }
@@ -21,7 +21,7 @@ restart.addEventListener("click",()=>{
     localStorage.setItem("users",JSON.stringify(user))
     console.log(JSON.stringify(user));
     if(gameNumber == user.length){
-        window.location.href="C:\\Users\\hp\\OneDrive\\שולחן העבודה\\binyamintek\\portalGames\\mainIndex.html";
+        window.location.href="\\mainIndex.html";
     }
     else{
         localStorage.setItem("gameNumber",gameNumber);

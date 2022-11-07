@@ -63,10 +63,10 @@ const addFunctions= ()=>{
         numPlayers++;
     });
     addButton.addEventListener("mouseover",()=>{
-        addButton.style.background = "rgb(20 85 170)"
+        addButton.style.background = "rgb(230 230 230)"
     })
     addButton.addEventListener("mouseout",()=>{
-        addButton.style.background = "rgb(25 90 175)"
+        addButton.style.background = "rgb(255 255 255)"
     })   
 }
 const removeFunctoins = ()=>{
@@ -74,10 +74,10 @@ const removeFunctoins = ()=>{
         document.getElementById("removing").style.visibility = "visible";
     });
     removeButton.addEventListener("mouseover",()=>{
-        removeButton.style.background = "rgb(20 85 170)"
+        removeButton.style.background = "rgb(230 230 230)"
     })
     removeButton.addEventListener("mouseout",()=>{
-        removeButton.style.background = "rgb(25 90 175)"
+        removeButton.style.background = "rgb(255 255 255)"
     })   
     
 }

@@ -36,6 +36,7 @@ const users =[];
 const gameNumber = localStorage.getItem("gameNumber");
 let extract = JSON.parse(localStorage.getItem("users"))
 
+//create array with JSON from localStorage 
 const getUsers = ()=>{
     if(gameNumber==0){
         extract.forEach((v)=>{
@@ -48,7 +49,6 @@ const getUsers = ()=>{
         extract.forEach((v)=>{
             users.push(v);
             console.log(users);
-        
         }); 
     }
 }
