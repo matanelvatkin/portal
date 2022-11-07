@@ -18,7 +18,7 @@ const imgLink = {pablo:{src:".\\game_pablo\\index.html",admin:"pablo",name:"pabl
 , libi :{src:null,admin:"mob vd",name:"giga bash"}
 , itamar:{src:".\\game_itamar\\project_1.html",admin:"itamar",name:"itamar memory game"},
 vatkin:{src:".\\memoryGame\\startIndex.html",admin:"matanel",name:"nba"},
-moran:{src:null,admin:"bfasdfcx",name:"rosh royal"}};
+moran:{src:".\\game_moran\\index.html",admin:"moran",name:"moran game"}};
 
 //avatar IMG
 const avatars = ["./gamesPictures/avatar1.jpg","./gamesPictures/avatar2.jpg","./gamesPictures/avatar3.jpg","./gamesPictures/avatar4.jpg"];
@@ -49,7 +49,7 @@ const showingUsers = ()=>{
     showUsers.innerHTML =""
     users.map((v)=>{
         showUsers.innerHTML +=  `
-        <ul">
+        <ul class="recordMain">
            <il><img src="${v.avtar}" alt="${v.nickName}" class = "avatrImg"></il>
            <il>${v.user}</il>
            <il>${v.nickName}</il>
@@ -212,9 +212,19 @@ else{
     removeFunctoins();
     //extract JSON
     let temp = JSON.parse(localStorage.getItem("users"))
-    temp.forEach((v)=>{
-        users.push(v)
-    })
+    if(!temp[0].avtar){
+        temp.forEach((v)=>{
+            users.push(JSON.parse(v))
+            console.log(users);
+        
+        }); 
+    }
+    else{
+        temp.forEach((v)=>{
+            users.push(v);
+            console.log(users);
+        }); 
+    }
     showingUsers();
 }
 

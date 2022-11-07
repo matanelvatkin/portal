@@ -38,7 +38,7 @@ let extract = JSON.parse(localStorage.getItem("users"))
 
 //create array with JSON from localStorage 
 const getUsers = ()=>{
-    if(gameNumber==0){
+    if(!extract[0].avtar){
         extract.forEach((v)=>{
             users.push(JSON.parse(v))
             console.log(users);
@@ -216,20 +216,20 @@ function addRcorde(){
 }
 
 function checkRecord(){
-    // let temp = [];
-    // let smeller = 0;
-    // for (i of users){
-    //     for(j of users){
-    //         if(i.score <j.score){
-    //             smeller++;
-    //         }
-    //     }
-    //     temp[smeller] = i;
-    //     smeller = 0;
-    // }
-    // temp.forEach((v,i)=>{
-    //     users[i] = v;
-    // });
+    let temp = [];
+    let smeller = 0;
+    for (i of users){
+        for(j of users){
+            if(i.score <j.score){
+                smeller++;
+            }
+        }
+        temp[smeller] = i;
+        smeller = 0;
+    }
+    temp.forEach((v,i)=>{
+        users[i] = v;
+    });
 }
 function showRecord(){
     getUsers();
